@@ -4,7 +4,7 @@ import com.andrelucas.algo.queue.CyclicBufferQueue;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class ClassicQueueTest {
+public class CyclicBufferQueueTest {
 
     @Test
     void shouldRemoveTheFirstElementThatIsInQueue(){
