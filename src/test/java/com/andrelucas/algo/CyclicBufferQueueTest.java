@@ -24,28 +24,30 @@ public class CyclicBufferQueueTest {
     @Test
     void shouldRemoveTheFirstElementAddOneMoreElementAsLastAndRemoveTheSecondElementIsInQueue(){
         var queue = new CyclicBufferQueue<String>(4);
-        var firstElement = "Andre";
-        var secondElement = "Lucas";
-        var lastElement = "Karol";
 
-        queue.enqueue(firstElement);
-        queue.enqueue(secondElement);
+        queue.enqueue("Andre");
+        queue.enqueue("Lucas");
         queue.enqueue("Santos");
         queue.enqueue("Silva");
+        queue.enqueue("Karol");
 
-        var firstData = queue.dequeue();
-        queue.enqueue(lastElement);
+        Assertions.assertEquals("Andre", queue.dequeue());
+        Assertions.assertEquals("Lucas", queue.dequeue());
 
-        Assertions.assertEquals(firstElement, firstData);
+        queue.enqueue("A");
+        queue.enqueue("B");
 
-        var secondData = queue.dequeue();
-        Assertions.assertEquals(secondElement, secondData);
+        Assertions.assertEquals("Santos", queue.dequeue());
 
-        queue.dequeue();
-        queue.dequeue();
+        queue.enqueue("C");
 
-        var lastData = queue.dequeue();
-        Assertions.assertEquals(lastElement, lastData);
+        Assertions.assertEquals("Silva",  queue.dequeue());
+        Assertions.assertEquals("Karol",  queue.dequeue());
+        Assertions.assertEquals("A",  queue.dequeue());
+
+
+        Assertions.assertEquals("B", queue.dequeue());
+        Assertions.assertEquals("C", queue.dequeue());
     }
 
 

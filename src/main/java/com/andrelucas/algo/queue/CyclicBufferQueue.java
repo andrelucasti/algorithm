@@ -4,7 +4,7 @@ public class CyclicBufferQueue<T> implements Queue<T>{
     private Object[] array;
     private int head = 0;
     private int tail = 0;
-    private final int queueCapacity;
+    private int queueCapacity;
 
     public CyclicBufferQueue(int queueCapacity){
         this.queueCapacity = queueCapacity;
@@ -15,17 +15,29 @@ public class CyclicBufferQueue<T> implements Queue<T>{
 
     @Override
     public void enqueue(T data) {
-        if (queueFull() && this.array[this.head] == null){
-            this.tail = 0;
+
+        if (queueFull()){
+            var hasSpace = false;
+            for(int i = 0; i < this.head ; i++) {
+                if (array[i] == null){
+                    array[i] = data;
+                    hasSpace = true;
+                    break;
+                }
+
+            }
+
+            if (!hasSpace){
+                array = grow();
+                array[this.tail] = data;
+                this.tail++;
+
+            }
+
+        } else {
+            array[this.tail] = data;
+            this.tail++;
         }
-
-        if(queueFull() && this.array[this.head] != null){
-            this.array = rebuildArray();
-        }
-
-        array[this.tail] = data;
-
-        this.tail++;
     }
 
     @Override
@@ -46,12 +58,13 @@ public class CyclicBufferQueue<T> implements Queue<T>{
     }
 
     private boolean queueFull(){
-        return this.array.length == this.tail;
+        return this.tail >= this.array.length;
     }
 
-    private Object[] rebuildArray(){
+    private Object[] grow(){
         //Rebuild array
-        var newArray = new Object[queueCapacity + 2];
+        this.queueCapacity = queueCapacity + 2;
+        var newArray = new Object[queueCapacity];
 
         System.arraycopy(this.array, 0, newArray, 0, this.array.length);
 
