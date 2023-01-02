@@ -12,7 +12,6 @@ public class CyclicBufferQueue<T> implements Queue<T>{
         array = new Object[queueCapacity];
     }
 
-
     @Override
     public void enqueue(T data) {
 
@@ -44,7 +43,8 @@ public class CyclicBufferQueue<T> implements Queue<T>{
     public T dequeue() {
         T data = null;
         while (data == null){
-            if (array.length == head) {
+            if (lastPosition()) {
+                // Back to the beginning
                 this.head = 0;
             }
 
@@ -69,5 +69,9 @@ public class CyclicBufferQueue<T> implements Queue<T>{
         System.arraycopy(this.array, 0, newArray, 0, this.array.length);
 
         return newArray;
+    }
+
+    private boolean lastPosition(){
+        return array.length == head;
     }
 }
