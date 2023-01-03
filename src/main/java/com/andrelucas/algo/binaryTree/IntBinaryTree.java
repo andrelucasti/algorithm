@@ -1,17 +1,17 @@
-package com.andrelucas.algo.binaryheap;
+package com.andrelucas.algo.binaryTree;
 
 import java.util.stream.Stream;
 
-public class IntBinaryHeap implements IBinaryHeap<Integer> {
+public class IntBinaryTree implements IBinaryTree<Integer> {
 
     private final Integer[] array;
     private int index = -1;
 
-    public IntBinaryHeap() {
+    public IntBinaryTree() {
         array = new Integer[DEFAULT_VALUE];
     }
 
-    public IntBinaryHeap(int capacity) {
+    public IntBinaryTree(int capacity) {
         array = new Integer[capacity];
     }
 

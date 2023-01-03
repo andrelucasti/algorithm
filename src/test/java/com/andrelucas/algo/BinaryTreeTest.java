@@ -1,7 +1,6 @@
 package com.andrelucas.algo;
 
-import com.andrelucas.algo.binaryheap.IntBinaryHeap;
-import com.andrelucas.algo.queue.BinaryHeap;
+import com.andrelucas.algo.binaryTree.IntBinaryTree;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,22 +9,10 @@ import java.util.Arrays;
 public class BinaryHeapTest {
 
     @Test
-    void shouldAddFirstElementInFirstLevel(){
-        var names = new String[]{"Andre"};
-        var binaryHeap = new BinaryHeap<String>();
-
-        binaryHeap.addAll(names);
-
-        var firstElement = binaryHeap.getAll()[0];
-        Assertions.assertEquals("Andre", firstElement);
-
-    }
-
-    @Test
     void shouldReturnTheMaxValue(){
         var numbers = new Integer[]{4, 2, 8, 7};
 
-        var binaryHeap = new IntBinaryHeap();
+        var binaryHeap = new IntBinaryTree();
         binaryHeap.addAll(numbers);
 
         var result = binaryHeap.getAll()[0];
@@ -37,7 +24,7 @@ public class BinaryHeapTest {
     void shouldReturnTheSecondElementInSecondLevel(){
         var numbers = new Integer[]{4, 2, 8, 7};
 
-        var binaryHeap = new IntBinaryHeap();
+        var binaryHeap = new IntBinaryTree();
         binaryHeap.addAll(numbers);
 
         var result = binaryHeap.getAll()[1];
@@ -49,7 +36,7 @@ public class BinaryHeapTest {
     void shouldReturnTheLastElementInLastLevel(){
         var numbers = new Integer[]{4, 2, 8, 7, 3};
 
-        var binaryHeap = new IntBinaryHeap(5);
+        var binaryHeap = new IntBinaryTree(5);
         binaryHeap.addAll(numbers);
 
         var result = binaryHeap.getAll()[4];
@@ -62,7 +49,7 @@ public class BinaryHeapTest {
         var numbers = new Integer[]{4, 2, 8, 7, 1, 5, 3, 6, 10};
         var expected = new Integer[]{10, 8, 5, 7, 1, 4, 3, 2, 6};
 
-        var binaryHeap = new IntBinaryHeap(numbers.length);
+        var binaryHeap = new IntBinaryTree(numbers.length);
         binaryHeap.addAll(numbers);
 
         var result = binaryHeap.getAll();
